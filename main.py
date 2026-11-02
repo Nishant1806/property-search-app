@@ -6,6 +6,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import HTMLResponse
@@ -409,7 +410,7 @@ HOME_HTML = """<!DOCTYPE html>
 
 @app.get("/", response_class=HTMLResponse)
 async def home():
-    return HOME_HTML
+    return Path(__file__).with_name("index.html").read_text(encoding="utf-8")
 
 
 @app.get("/search")
